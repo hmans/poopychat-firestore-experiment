@@ -13,30 +13,24 @@
   </div>
 </template>
 
-<script>
+<script lang="coffee">
 import { db } from '../main'
 
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      messages: [],
-      message: ''
-    }
-  },
-  firestore () {
-    return {
-      messages: db.collection('messages').orderBy('createdAt')
-    }
-  },
-  methods: {
-    addMessage (message) {
-      const createdAt = new Date()
+PoopyChat =
+  data: ->
+    messages: []
+    message: ''
+
+  firestore: ->
+    messages: db.collection('messages').orderBy('createdAt')
+
+  methods: 
+    addMessage: (message) ->
+      createdAt = new Date()
       db.collection('messages').add({ message, createdAt })
-      this.message = ''
-    }
-  }
-}
+      @message = ''
+      
+export default PoopyChat
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
