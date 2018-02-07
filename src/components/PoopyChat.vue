@@ -6,8 +6,8 @@
       <p>{{ message.message }}</p>
     </article>
 
-    <form @submit="addMessage(message)">
-      <input v-model="message" placeholder="Poop something" autofocus="true">
+    <form @submit="postMessage">
+      <input v-model="newMessage" placeholder="Poop something" autofocus="true">
       <button type="submit">POOP!</button>
     </form>
   </div>
@@ -16,21 +16,21 @@
 <script lang="coffee">
 import { db } from '../main'
 
-PoopyChat =
+export default
   data: ->
     messages: []
-    message: ''
+    newMessage: ''
 
   firestore: ->
     messages: db.collection('messages').orderBy('createdAt')
 
   methods: 
-    addMessage: (message) ->
-      createdAt = new Date()
-      db.collection('messages').add({ message, createdAt })
-      @message = ''
-      
-export default PoopyChat
+    postMessage: ->
+      db.collection('messages').add
+        message: @newMessage
+        createdAt: new Date()
+        
+      @newMessage = ''
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
