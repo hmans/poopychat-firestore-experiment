@@ -11,6 +11,15 @@ export default {
 </script>
 
 <style>
+body {
+  font: 18px/1.5 Georgia;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font: inherit;
+  font-weight: bold;
+}
+
 .container {
   max-width: 800px;
   margin-left: auto;
